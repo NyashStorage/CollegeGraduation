@@ -1,0 +1,25 @@
+{
+    "name": "collegesite",
+    "version": "1.0.0",
+    "author": "NyashMyash99",
+    "license": "CC BY-NC 4.0",
+    "description": "Сайт ФГБОУ ВО БГТУ Политехнического колледжа.",
+    "main": "app.js",
+    "scripts": {
+        "server-dev": "nodemon app.js",
+        "server-prod": "node app.js",
+        "client-dev": "npm run start --prefix client",
+        "client-prod": "npm run start --prefix client",
+        "dev": "concurrently \"npm run server-dev\" \"npm run client-dev\"",
+        "prod": "concurrently \"npm run server-prod\" \"npm run client-prod\""
+    },
+    "dependencies": {
+        "concurrently": "^6.0.0",
+        "express": "^4.17.1",
+        "moment": "^2.29.1",
+        "sqlite3": "^5.0.2"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.7"
+    }
+}
