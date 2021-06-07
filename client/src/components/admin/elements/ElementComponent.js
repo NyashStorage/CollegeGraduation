@@ -87,7 +87,7 @@ export const ElementComponent = ({ history, match, type }) => {
                         if(element) setTimeout(() =>
                             window.M.Datepicker.getInstance(document.querySelector(`#${ field.name }`))
                                 .setDate(new Date(element[field.name]))
-                        , 10);
+                        , 800);
 
                         return <input
                             name={ field.name }

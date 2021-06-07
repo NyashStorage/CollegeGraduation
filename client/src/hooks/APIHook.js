@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-const { backendPort } = require("../configs/config");
+const { apiHost, backendPort } = require("../configs/config");
 
 export const useAPI = () => {
     const [error, setError] = useState(null);
@@ -14,7 +14,7 @@ export const useAPI = () => {
      */
     const request = useCallback(async (url, method = "GET", body = null, headers = { }) => {
         try {
-            const response = await fetch(`http://localhost:${ backendPort }/${url}`, { method,
+            const response = await fetch(`http://${ apiHost }:${ backendPort }/${url}`, { method,
                 body: (body ? JSON.stringify(body) : null),
                 headers: (body ? { ...headers, "Content-Type": "application/json" } : { ...headers })
             });
