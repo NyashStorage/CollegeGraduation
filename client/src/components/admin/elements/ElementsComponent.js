@@ -93,9 +93,15 @@ export const ElementsComponent = ({ history, match }) => {
                                     return !fields.fields?.includes(e[0]) ? <React.Fragment key={ Math.random() }/> :
                                         <td onClick={ () => navigation.lazyOpen(`admin/${ match.params.category }/${ elem.id }`) } key={ elem.id + e[1] }>{ value }</td>
                                 }) }
-                                <td className="hoverable" onClick={ () => remove(elem.id) }>
-                                    <i className="material-icons">delete</i>
-                                </td>
+                                {
+                                    match.params.category === "pages" && elem?.link === "Главная страница" ?
+                                        <td>
+                                            <i className="material-icons">cancel</i>
+                                        </td> :
+                                        <td className="hoverable" onClick={ () => remove(elem.id) }>
+                                            <i className="material-icons">delete</i>
+                                        </td>
+                                }
                             </tr>)
                         }
                         <tr className="empty hide">

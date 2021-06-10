@@ -51,7 +51,7 @@ class PageRouter {
 
             if(!await validatePassword(req.body.password)) return res.status(404).json({ message: `Пароль указан неверно.` });
 
-            if(!/^[a-zA-Z0-9_]+$/.test(req.body.link))
+            if(req.body.link !== "Главная страница" && !/^[a-zA-Z0-9_]+$/.test(req.body.link))
                 return res.status(400).json({ message: `Ссылка имеет неверный формат. Используйте паттерн "[a-zA-Z0-9_]+".` });
 
             let menu = req.body?.menu;
@@ -62,10 +62,10 @@ class PageRouter {
                 menu = isNaN(menu) ? (menu === "true" || menu === "on") : !!Number.parseInt(menu);
             }
 
-            const query = `UPDATE pages SET link='${ req.body.link.toLowerCase() }', title='${ encodeURIComponent(req.body.title) }', html='${ encodeURIComponent(req.body.html) }', menu=${ menu || 0 } WHERE id=${ req.body.id }`;
+            const query = `UPDATE pages SET link='${ req.body.link !== "Главная страница" ? req.body.link.toLowerCase() : req.body.link }', title='${ encodeURIComponent(req.body.title) }', html='${ encodeURIComponent(req.body.html) }', menu=${ menu || 0 } WHERE id=${ req.body.id }`;
             const page = (await dbManager.query(`SELECT * FROM pages WHERE id=${ req.body.id }`))[0];
 
-            await addHistory(query, `IF EXISTS(SELECT * FROM pages WHERE id=${ page.id }) UPDATE pages SET link='${ page.link.toLowerCase() }', title='${ encodeURIComponent(page.title) }', html='${ encodeURIComponent(page.html) }', menu=${ menu || 0 } WHERE id=${ page.id } ELSE INSERT INTO pages ('title', 'link', 'html', 'menu') VALUES ('${ encodeURIComponent(page.title) }', '${ page.link.toLowerCase() }', '${ encodeURIComponent(page.html) }', ${ menu || 0 })`);
+            await addHistory(query, `IF EXISTS(SELECT * FROM pages WHERE id=${ page.id }) UPDATE pages SET link='${ page.link !== "Главная страница" ? page.link.toLowerCase() : page.link }', title='${ encodeURIComponent(page.title) }', html='${ encodeURIComponent(page.html) }', menu=${ menu || 0 } WHERE id=${ page.id } ELSE INSERT INTO pages ('title', 'link', 'html', 'menu') VALUES ('${ encodeURIComponent(page.title) }', '${ page.link.toLowerCase() }', '${ encodeURIComponent(page.html) }', ${ menu || 0 })`);
             await dbManager.query(query);
 
             res.send((await dbManager.query(`SELECT * FROM pages WHERE id=${ page.id }`))[0]);

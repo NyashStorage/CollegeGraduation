@@ -10,7 +10,7 @@ export const CommonPage = ({ match, history }) => {
 
     useEffect(() => {
         (async () => {
-            const data = await request(`api/pages/get?link=${ match.params.page }`);
+            const data = await request(`api/pages/get?link=${ match.params.page || "Главная страница" }`);
             if(!data.length) return history.push("/");
             setPage(data[0]);
         })();

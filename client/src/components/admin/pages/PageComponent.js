@@ -24,7 +24,11 @@ export const PageComponent = ({ history, match, type }) => {
         form.forEach((item) => { data[item[0]] = item[1] });
         data["password"] = password;
         data["html"] = toHtml(convertToRaw(code.getCurrentContent()));
-        if(type === "update") data["id"] = element.id;
+
+        if(type === "update") {
+            data["id"] = element.id;
+            if(!data.link) data.link = "Главная страница";
+        }
 
         const ans = await request(`api/pages/${ type }`, "POST", data);
         if(!ans) return;
@@ -60,6 +64,7 @@ export const PageComponent = ({ history, match, type }) => {
                         type="text"
                         placeholder="Ссылка"
                         defaultValue={ element ? element.link : "" }
+                        disabled={ element ? element.link === "Главная страница" : false }
                         required
                     />
                 </div>

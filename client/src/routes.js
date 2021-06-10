@@ -20,6 +20,7 @@ export const useRoutes = (password) => {
                 <Route path="/staff" component={ EmployeesComponent } exact/>
                 <Route path="/admin" component={ AuthComponent } exact/>
                 <Route path="/:page" render={ (props) => <CommonPage { ...props }/> } exact/>
+                <Route path="/" render={ (props) => <CommonPage { ...props }/> } exact/>
                 <Redirect to="/"/>
             </Switch>
         );
@@ -35,6 +36,7 @@ export const useRoutes = (password) => {
             <Route path="/admin/:category/:id" render={ (props) => <ElementComponent { ...props } type="update"/> } exact/>
             <Route path="/staff" component={ EmployeesComponent } exact/>
             <Route path="/:page" render={ (props) => <CommonPage  { ...props }/> } exact/>
+            <Route path="/" render={ (props) => <CommonPage { ...props }/> } exact/>
             <Redirect to="/"/>
         </Switch>
     );
