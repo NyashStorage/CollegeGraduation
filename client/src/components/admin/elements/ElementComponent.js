@@ -85,8 +85,9 @@ export const ElementComponent = ({ history, match, type }) => {
 
                     if(field.type === "LONG") {
                         if(element) setTimeout(() =>
-                            window.M.Datepicker.getInstance(document.querySelector(`#${ field.name }`))
-                                .setDate(new Date(element[field.name]))
+                            window.M.Datepicker
+                                .getInstance(document.querySelector(`#${ field.name }`))
+                                ?.setDate(new Date(element[field.name]))
                         , 800);
 
                         return <input

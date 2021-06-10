@@ -19,7 +19,7 @@ export const CommonPage = ({ match, history }) => {
     return (
         <>
             <Helmet title={ `${ decodeURIComponent(page.title) } < Политехнический колледж БГТУ` }/>
-            <div dangerouslySetInnerHTML={{ __html: decodeURIComponent(page?.html) }}/>
+            <div dangerouslySetInnerHTML={{ __html: decodeURIComponent(page?.html || "") }}/>
         </>
     );
 }

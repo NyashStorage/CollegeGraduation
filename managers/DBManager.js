@@ -18,7 +18,8 @@ class DBManager {
             await db.query("CREATE TABLE IF NOT EXISTS pages ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'link' TEXT NOT NULL, 'title' TEXT NOT NULL, 'html' TEXT NOT NULL, 'menu' BOOLEAN NOT NULL)");
             if(!(await this.size("pages"))) {
                 // TODO: Создать базовые страницы сайта.
-                await db.query("INSERT INTO pages (link, title, html, menu) VALUES ('test', 'Тестовая страница', 'Test page', '1')");
+                await db.query("INSERT INTO pages (link, title, html, menu) VALUES ('Главная страница', 'Главная страница', 'Главная страница (редактируется из панели администратора)', '0')");
+                await db.query("INSERT INTO pages (link, title, html, menu) VALUES ('test', 'Тестовая страница', 'Тестовая страница (редактируется из панели администратора)', '1')");
             }
 
             await db.query("CREATE TABLE IF NOT EXISTS notifications ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'message' TEXT NOT NULL, 'deadline' LONG NOT NULL)");

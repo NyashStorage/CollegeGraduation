@@ -56,42 +56,42 @@ export const ChangeHistoryComponent = () => {
                 </div>
             </div>
             { !history.length ?
-                <div className="loader normal">
+                <div className="loader normal valign">
                     <i className="material-icons">cancel</i> Ничего не найдено
                 </div> :
                 <table className="highlight centered">
                     <thead>
-                    <tr>
-                        <th>Дата</th>
-                        <th>Запрос</th>
-                        <th>Восстановить</th>
-                    </tr>
+                        <tr>
+                            <th>Дата</th>
+                            <th>Запрос</th>
+                            <th>Восстановить</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    { history.map(elem => <tr key={ elem.id }>
-                            <td>{ date(new Date(elem.date), "dd.mm.yyyy hh:MM:ss") }</td>
-                            <td
-                                className="tooltipped"
-                                data-position="bottom"
-                                data-tooltip={
-                                    decodeURIComponent(decodeURIComponent(elem.restore)).length > 150 ?
-                                    decodeURIComponent(decodeURIComponent(elem.restore)).substring(0, 150) + "..." :
-                                    decodeURIComponent(decodeURIComponent(elem.restore))
-                                }
-                            >{ decodeURIComponent(elem.query) }</td>
-                            <td
-                                className={ elem.restored ? "" : "hoverable" }
-                                onClick={ elem.restored ? () => { } : () => restore(elem.id) }
-                            >
-                                <i className="material-icons">{ elem.restored ? "cancel" : "low_priority" }</i>
+                        { history.map(elem => <tr key={ elem.id }>
+                                <td>{ date(new Date(elem.date), "dd.mm.yyyy hh:MM:ss") }</td>
+                                <td
+                                    className="tooltipped"
+                                    data-position="bottom"
+                                    data-tooltip={
+                                        decodeURIComponent(decodeURIComponent(elem.restore)).length > 150 ?
+                                        decodeURIComponent(decodeURIComponent(elem.restore)).substring(0, 150) + "..." :
+                                        decodeURIComponent(decodeURIComponent(elem.restore))
+                                    }
+                                >{ decodeURIComponent(elem.query) }</td>
+                                <td
+                                    className={ elem.restored ? "" : "hoverable" }
+                                    onClick={ elem.restored ? () => { } : () => restore(elem.id) }
+                                >
+                                    <i className="material-icons">{ elem.restored ? "cancel" : "low_priority" }</i>
+                                </td>
+                            </tr>
+                        ) }
+                        <tr className="empty hide">
+                            <td colSpan={ 3 }>
+                                Ничего не найдено
                             </td>
                         </tr>
-                    ) }
-                    <tr className="empty hide">
-                        <td colSpan={ 3 }>
-                            Ничего не найдено
-                        </td>
-                    </tr>
                     </tbody>
                 </table>
             }
