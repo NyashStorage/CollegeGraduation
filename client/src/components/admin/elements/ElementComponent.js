@@ -53,14 +53,14 @@ export const ElementComponent = ({ history, match, type }) => {
                     weekdaysAbbrev: ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"]
                 }
             })
-            , 5);
+            , 500);
 
             if(type !== "update") return;
 
             const elem = await request(`api/${ match.params.category }/get?id=${ match.params.id }`);
             if(elem.length === 0) return history.push(`/admin/${ match.params.category }`);
             if(Object.keys(elem[0]).length > 0) setElement(elem[0]);
-        })();
+        })()
     }, [request, type, match.params.category, match.params.id, history]);
 
     return (
@@ -84,7 +84,7 @@ export const ElementComponent = ({ history, match, type }) => {
                     </p>
 
                     if(field.type === "LONG") {
-                        if(element) setTimeout(() =>
+                        setTimeout(() =>
                             window.M.Datepicker
                                 .getInstance(document.querySelector(`#${ field.name }`))
                                 ?.setDate(new Date(element[field.name]))
