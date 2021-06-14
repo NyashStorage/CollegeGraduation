@@ -48,9 +48,21 @@ body {
 .w100 { width: 100% }
 .h100 { height: 100% }
 
-.title, h1 { font-size: $textLarge }
-.normal, h2 { font-size: $textNormal }
-.small, h3 { font-size: $textSmall }
+.title, h1 {
+    font-family: "Comic Sans", sans-serif;
+    font-weight: $textBold;
+    font-size: $textLarge;
+}
+.normal, h2 {
+    font-family: "Comic Sans", sans-serif;
+    font-weight: $textBold;
+    font-size: $textNormal;
+}
+.small, h3 {
+    font-family: "Comic Sans", sans-serif;
+    font-weight: $textBold;
+    font-size: $textSmall;
+}
 
 .bold { font-weight: $textBold }
 .thin { font-weight: $textThin }
@@ -79,9 +91,10 @@ body {
 .toast, .material-tooltip { background: $baseColor; color: $textColor; }
 
 a {
-    color: $textHover;
-    box-shadow: none;
-    @extend .hoverable;
+    color: lighten($baseColor, 15);
+    transition: color $animationSpeed;
+
+    &:hover { color: $textHover }
 }
 input, textarea {
     border-color: $baseColor !important;
@@ -173,6 +186,9 @@ header {
 /* ------------------------ */
 
 /* Основной контент */
+article img { width: 100% !important }
+.rdw-editor-toolbar > div > div > img { width: auto !important }
+
 main {
     display: flex; flex: 1 0 auto;
     margin: calc(1vw + 1vh) auto;
@@ -229,7 +245,7 @@ main {
         margin: 0;
         @extend .card, .z-depth-1;
 
-        &> div > p { margin: 0 }
+        //&> div > p { margin: 0 }
     }
 }
 
@@ -363,7 +379,9 @@ td.is-selected { background: $baseColor !important }
     @extend .card, .z-depth-1;
 }
 
-h1, h2, h3, .public-DraftStyleDefault-block { margin: 0 }
+h1, h2, h3, .public-DraftStyleDefault-block, figure { margin: 0 }
+
+.rdw-link-decorator-icon { display: none }
 /* ------------------------ */
 
 /* Подвал сайта */

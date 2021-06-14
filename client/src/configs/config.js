@@ -9,6 +9,6 @@ const backendPort = 81;
  * Указывается без протокола и закрывающего слеша.
  * @type {string}
  */
-const apiHost = "nyashmyash99.ru"
+const apiHost = "localhost"
 
 module.exports = { apiHost, backendPort };
