@@ -31,7 +31,7 @@ export const ChangeHistoryComponent = () => {
     }
 
     const updateHistory = useCallback(async () => {
-        setHistory((await request(`api/history/get?password=${ password }`)).reverse());
+        setHistory((await request(`api/history/get?password=${ password }`))?.reverse());
         window.M.Tooltip.init(document.querySelectorAll(".tooltipped"), { });
     }, [request, password]);
 
@@ -78,7 +78,7 @@ export const ChangeHistoryComponent = () => {
                                         decodeURIComponent(decodeURIComponent(elem.restore)).substring(0, 150) + "..." :
                                         decodeURIComponent(decodeURIComponent(elem.restore))
                                     }
-                                >{ decodeURIComponent(elem.query) }</td>
+                                ><span>{ decodeURIComponent(elem.query) }</span></td>
                                 <td
                                     className={ elem.restored ? "" : "hoverable" }
                                     onClick={ elem.restored ? () => { } : () => restore(elem.id) }
