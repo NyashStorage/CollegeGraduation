@@ -84,11 +84,12 @@ export const ElementComponent = ({ history, match, type }) => {
                     </p>
 
                     if(field.type === "LONG") {
-                        setTimeout(() =>
-                            window.M.Datepicker
-                                .getInstance(document.querySelector(`#${ field.name }`))
-                                ?.setDate(new Date(element[field.name]))
-                        , 800);
+                        setTimeout(() => {
+                            if(element)
+                                window.M.Datepicker
+                                    .getInstance(document.querySelector(`#${field.name}`))
+                                    ?.setDate(new Date(element[field.name]));
+                        }, 800);
 
                         return <input
                             name={ field.name }
@@ -121,5 +122,5 @@ export const ElementComponent = ({ history, match, type }) => {
                 </button>
             </form>
         </>
-    );
+    )
 }
